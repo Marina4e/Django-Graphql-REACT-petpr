@@ -1,0 +1,65 @@
+# Python / Django / virtual environment
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.env/
+.env.local
+.env.development
+.env.test
+.env.production
+*.env.backup
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django stuff
+*.log
+*.pot
+*.sqlite3
+media/
+staticfiles/
+migrations/__pycache__/
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+*.iws
+
+# macOS junk
+.DS_Store
+
+# Node.js / Frontend (якщо frontend в окремій папці)
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/coverage/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Загальні тимчасові файли
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+*.temp
+
+# Якщо є інші інструменти (наприклад, Docker, pytest cache тощо)
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
