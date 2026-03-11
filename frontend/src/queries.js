@@ -1,19 +1,55 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOOKS_QUERY = gql`
-query GetBooks($page:Int,$limit:Int){
 
-  allBooks(page:$page,limit:$limit){
+query GetBooks(
+$page:Int
+$limit:Int
+$search:String
+$authorId:Int
+$orderBy:String
+){
 
-    id
-    title
-    publishedDate
+allBooks(
+page:$page
+limit:$limit
+search:$search
+authorId:$authorId
+orderBy:$orderBy
+){
 
-    author{
-      name
-    }
+total
+page
+pages
 
-  }
+books{
+
+id
+title
+publishedDate
+
+author{
+name
+}
 
 }
+
+}
+
+}
+`;
+
+export const FETCH_AUTHORS_QUERY = gql`
+
+query{
+
+allAuthors{
+
+id
+name
+
+}
+
+}
+
 `;

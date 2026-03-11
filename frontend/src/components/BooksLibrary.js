@@ -1,68 +1,132 @@
-import React, { useState } from "react";
-import { useQuery } from "@apollo/client/react";
+import React,{useState} from "react";
+import {useQuery} from "@apollo/client/react";
+import {Link} from "react-router-dom";
 
-import { FETCH_BOOKS_QUERY } from "../queries";
+import {FETCH_BOOKS_QUERY,FETCH_AUTHORS_QUERY} from "../queries";
 
 function BooksLibrary(){
 
-  const [page,setPage] = useState(1);
+const [page,setPage] = useState(1);
+const [search,setSearch] = useState("")
+const [authorId,setAuthorId] = useState("")
+const [sort,setSort] = useState("")
 
-  const {loading,error,data} = useQuery(
-    FETCH_BOOKS_QUERY,
-    {
-      variables:{
-        page:page,
-        limit:6
-      }
-    }
-  );
+const {data:authorsData} = useQuery(FETCH_AUTHORS_QUERY)
 
-  if(loading) return <p>Завантаження...</p>;
+const {loading,error,data,refetch} = useQuery(
+FETCH_BOOKS_QUERY,
+{
+variables:{
+page,
+limit:8,
+search,
+authorId: authorId ? parseInt(authorId) : null,
+orderBy:sort || null
+}
+}
+)
 
-  if(error) return <p>Помилка</p>;
+if(loading) return <p>Loading...</p>
+if(error) return <p>Error</p>
 
-  return(
+const books = data?.allBooks?.books || []
 
-    <div>
+return(
 
-      <h2>📚 Бібліотека</h2>
+<div>
 
-      <div className="booksGrid">
+<h2>📚 Library</h2>
 
-        {data?.allBooks.map(book =>(
+<div className="filters">
 
-          <div key={book.id} className="bookCard">
+<input
+placeholder="Search book"
+value={search}
+onChange={(e)=>{
+setPage(1)
+setSearch(e.target.value)
+}}
+/>
 
-            <h3>{book.title}</h3>
+<select
+value={authorId}
+onChange={(e)=>{
+setPage(1)
+setAuthorId(e.target.value)
+}}
+>
 
-            <p><b>Автор:</b> {book.author.name}</p>
+<option value="">All authors</option>
 
-            <p><b>Дата:</b> {book.publishedDate}</p>
+{authorsData?.allAuthors.map(author=>(
+<option key={author.id} value={author.id}>
+{author.name}
+</option>
+))}
 
-          </div>
+</select>
 
-        ))}
+<select
+value={sort}
+onChange={(e)=>setSort(e.target.value)}
+>
 
-      </div>
+<option value="">Sort</option>
+<option value="published_date">Date ↑</option>
+<option value="-published_date">Date ↓</option>
 
-      <div className="pagination">
+</select>
 
-        <button onClick={()=>setPage(page-1)} disabled={page===1}>
-          ← Попередня
-        </button>
+</div>
 
-        <span>Сторінка {page}</span>
+<div className="booksGrid">
 
-        <button onClick={()=>setPage(page+1)}>
-          Наступна →
-        </button>
+{books.map(book=>(
 
-      </div>
+<Link to={`/book/${book.id}`} key={book.id}>
 
-    </div>
+<div className="bookCard">
 
-  );
+<h3>{book.title}</h3>
+
+<p>Author: {book.author.name}</p>
+
+<p>{book.publishedDate}</p>
+
+</div>
+
+</Link>
+
+))}
+
+</div>
+
+<div className="pagination">
+
+<button
+onClick={()=>setPage(page-1)}
+disabled={page===1}
+>
+←
+</button>
+
+<span>
+{page} / {data.allBooks.pages}
+</span>
+
+<button
+onClick={()=>setPage(page+1)}
+disabled={page===data.allBooks.pages}
+>
+→
+</button>
+
+</div>
+
+</div>
+
+)
 
 }
 
-export default BooksLibrary;
+export default BooksLibrary

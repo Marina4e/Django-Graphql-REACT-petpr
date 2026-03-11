@@ -1,119 +1,137 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client/react";
-import { gql } from "@apollo/client";
+import React,{useState} from "react";
+import {useQuery,useMutation} from "@apollo/client/react";
+import {gql} from "@apollo/client";
+import {FETCH_AUTHORS_QUERY,FETCH_BOOKS_QUERY} from "../queries";
+import {useNavigate} from "react-router-dom";
 
-import { CREATE_BOOK_MUTATION } from "../mutations";
-import { FETCH_BOOKS_QUERY } from "../queries";
-
-const FETCH_AUTHORS = gql`
-  query {
-    allAuthors {
-      id
-      name
-    }
-  }
+const CREATE_BOOK = gql`
+mutation(
+$title:String!
+$authorId:Int!
+$publishedDate:Date!
+$isbn:String!
+$summary:String
+){
+createBook(
+title:$title
+authorId:$authorId
+publishedDate:$publishedDate
+isbn:$isbn
+summary:$summary
+){
+book{
+id
+}
+}
+}
 `;
 
-function BookForm() {
+function BookForm(){
 
-  const [title, setTitle] = useState("");
-  const [authorId, setAuthorId] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [isbn, setIsbn] = useState("");
+const navigate = useNavigate()
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+const [title,setTitle] = useState("")
+const [authorId,setAuthorId] = useState("")
+const [date,setDate] = useState("")
+const [isbn,setIsbn] = useState("")
+const [summary,setSummary] = useState("")
+const [message,setMessage] = useState("")
 
-  const { data: authorsData } = useQuery(FETCH_AUTHORS);
+const {data:authorsData} = useQuery(FETCH_AUTHORS_QUERY)
 
-  const [createBook] = useMutation(CREATE_BOOK_MUTATION);
+const [createBook] = useMutation(CREATE_BOOK)
 
-  const handleCreateBook = async () => {
+const submit = async(e)=>{
 
-    try {
+e.preventDefault()
 
-      await createBook({
-        variables: {
-          title,
-          authorId: parseInt(authorId),
-          publishedDate,
-          isbn
-        },
+await createBook({
 
-        // 👇 ГОЛОВНЕ ВИПРАВЛЕННЯ
-        refetchQueries: [
-          { query: FETCH_BOOKS_QUERY }
-        ],
+variables:{
+title,
+authorId:Number(authorId),
+publishedDate:date,
+isbn,
+summary
+},
 
-        awaitRefetchQueries: true
-      });
+refetchQueries:[
+{query:FETCH_BOOKS_QUERY}
+]
 
-      setSuccess("✅ Книга успішно створена!");
+})
 
-      setTimeout(() => {
-        setSuccess("");
-      }, 10000);
+setMessage("Book created ✅")
 
-      setTitle("");
-      setAuthorId("");
-      setPublishedDate("");
-      setIsbn("");
+setTimeout(()=>{
+navigate("/library")
+},10000)
 
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    }
-  };
-
-  return (
-    <div className="formBox">
-
-      <h2>📘 Створити нову книгу</h2>
-
-      <input
-        placeholder="Назва книги"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <select
-        value={authorId}
-        onChange={(e) => setAuthorId(e.target.value)}
-      >
-        <option value="">Оберіть автора</option>
-
-        {authorsData?.allAuthors.map((author) => (
-          <option key={author.id} value={author.id}>
-            {author.name}
-          </option>
-        ))}
-
-      </select>
-
-      <input
-        type="date"
-        value={publishedDate}
-        onChange={(e) => setPublishedDate(e.target.value)}
-      />
-
-      <input
-        placeholder="ISBN"
-        value={isbn}
-        onChange={(e) => setIsbn(e.target.value)}
-      />
-
-      <button
-        onClick={handleCreateBook}
-        disabled={!title || !authorId || !publishedDate}
-      >
-        Створити книгу
-      </button>
-
-      {success && <p className="success">{success}</p>}
-      {error && <p className="error">{error}</p>}
-
-    </div>
-  );
 }
 
-export default BookForm;
+return(
+
+<div>
+
+{message && (
+<p style={{color:"green"}}>
+{message}
+</p>
+)}
+
+<form className="formContainer" onSubmit={submit}>
+
+<h2>Create Book</h2>
+
+<input
+placeholder="Title"
+value={title}
+onChange={(e)=>setTitle(e.target.value)}
+/>
+
+<select
+value={authorId}
+onChange={(e)=>setAuthorId(e.target.value)}
+>
+
+<option value="">Select Author</option>
+
+{authorsData?.allAuthors.map(author=>(
+<option key={author.id} value={author.id}>
+{author.name}
+</option>
+))}
+
+</select>
+
+<input
+type="date"
+value={date}
+onChange={(e)=>setDate(e.target.value)}
+/>
+
+<input
+placeholder="ISBN"
+value={isbn}
+onChange={(e)=>setIsbn(e.target.value)}
+/>
+
+<textarea
+placeholder="Summary"
+value={summary}
+onChange={(e)=>setSummary(e.target.value)}
+/>
+
+<button type="submit">
+Create Book
+</button>
+
+</form>
+
+</div>
+
+)
+
+}
+
+export default BookForm

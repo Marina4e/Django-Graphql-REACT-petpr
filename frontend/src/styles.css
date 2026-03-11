@@ -90,3 +90,131 @@ color:white;
 border-radius:6px;
 cursor:pointer;
 }
+
+.booksGrid a{
+text-decoration:none;
+color:inherit;
+}
+
+.bookCard{
+background:white;
+border-radius:10px;
+padding:16px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+transition:0.2s;
+}
+
+.bookCard:hover{
+transform:translateY(-3px);
+}
+
+.filters{
+display:flex;
+gap:12px;
+margin-bottom:20px;
+align-items:center;
+}
+
+.filters input,
+.filters select{
+padding:8px 10px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+.formContainer{
+max-width:600px;
+margin:40px auto;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.formContainer input,
+.formContainer textarea,
+.formContainer select{
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:16px;
+width:100%;
+}
+
+.formContainer button{
+padding:10px;
+background:#3f51b5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.formContainer button:hover{
+background:#2f3fa3;
+}
+
+.bookPage{
+
+max-width:600px;
+margin:40px auto;
+background:white;
+padding:30px;
+
+border-radius:12px;
+
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+.bookTitle{
+font-size:28px;
+margin-bottom:20px;
+}
+
+.bookInfo{
+margin-bottom:10px;
+font-size:16px;
+}
+
+.bookButtons{
+
+margin-top:25px;
+
+display:flex;
+
+gap:15px;
+
+}
+
+.editButton{
+
+background:#5c5ce0;
+
+color:white;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.deleteButton{
+
+background:#e04c4c;
+
+color:white;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
