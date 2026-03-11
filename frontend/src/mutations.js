@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/react';
+import { gql } from '@apollo/client';
 
 export const CREATE_BOOK_MUTATION = gql`
   mutation CreateBook(

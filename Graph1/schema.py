@@ -16,14 +16,21 @@ class BookType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     all_authors = graphene.List(AuthorType)
-    all_books = graphene.List(BookType)
+    all_books = graphene.List(
+        BookType,
+        page=graphene.Int(),
+        limit=graphene.Int()
+    )
     book_by_id = graphene.Field(BookType, id=graphene.Int(required=True))
 
     def resolve_all_authors(root, info):
         return Author.objects.all()
 
-    def resolve_all_books(root, info):
-        return Book.objects.select_related("author").all()
+    def resolve_all_books(root, info, page=1, limit=6):
+        start = (page - 1) * limit
+        end = start + limit
+
+        return Book.objects.select_related("author").all()[start:end]
 
     def resolve_book_by_id(root, info, id):
         return Book.objects.get(pk=id)

@@ -1,18 +1,39 @@
-import React from 'react';
-import './styles.css';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import BooksList from './components/BooksList';
-import BookForm from './components/BookForm';
+import BookForm from "./components/BookForm";
+import BooksLibrary from "./components/BooksLibrary";
 
+import "./styles.css";
 
 function App() {
-  return (
-    <div className="container">
-      <h1>📚 Моя бібліотека</h1>
-      <BookForm />
-      <BooksList />
 
-    </div>
+  return (
+    <BrowserRouter>
+
+      <div className="container">
+
+        <h1>📚 Моя бібліотека</h1>
+
+        <nav className="menu">
+
+          <Link to="/">Бібліотека</Link>
+
+          <Link to="/create-book">Створити книгу</Link>
+
+        </nav>
+
+        <Routes>
+
+          <Route path="/" element={<BooksLibrary />} />
+
+          <Route path="/create-book" element={<BookForm />} />
+
+        </Routes>
+
+      </div>
+
+    </BrowserRouter>
   );
 }
 
