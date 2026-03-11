@@ -29,7 +29,7 @@ function BookPage(){
 
 const {id} = useParams()
 const navigate = useNavigate()
-const [message,setMessage] = React.useState("")
+
 const {loading,error,data} = useQuery(GET_BOOK,{
 variables:{id:Number(id)}
 })
@@ -37,7 +37,7 @@ variables:{id:Number(id)}
 const [deleteBook] = useMutation(DELETE_BOOK)
 
 if(loading) return <p>Loading...</p>
-if(error) return <p>Error</p>
+if(error) return <p>Error loading book</p>
 
 const book = data.bookById
 
@@ -45,25 +45,17 @@ return(
 
 <div className="bookPage">
 
-<h2 className="bookTitle">{book.title}</h2>
+<h2>{book.title}</h2>
 
-<p className="bookInfo">
+<p>
 <b>Author:</b> {book.author.name}
 </p>
 
-<p className="bookInfo">
+<p>
 <b>Date:</b> {book.publishedDate}
 </p>
 
-<p className="bookInfo">
-{book.summary}
-</p>
-
-{message && (
-<p style={{color:"green"}}>
-{message}
-</p>
-)}
+<p>{book.summary}</p>
 
 <div className="bookButtons">
 
@@ -82,11 +74,7 @@ await deleteBook({
 variables:{id:Number(id)}
 })
 
-setMessage("Book deleted ✅")
-
-setTimeout(()=>{
 navigate("/library")
-},12000)
 
 }}
 >
@@ -98,6 +86,7 @@ Delete Book
 </div>
 
 )
+
 }
 
 export default BookPage

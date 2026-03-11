@@ -3,6 +3,7 @@ import {useQuery,useMutation} from "@apollo/client/react";
 import {gql} from "@apollo/client";
 import {FETCH_AUTHORS_QUERY,FETCH_BOOKS_QUERY} from "../queries";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const CREATE_BOOK = gql`
 mutation(
@@ -35,7 +36,6 @@ const [authorId,setAuthorId] = useState("")
 const [date,setDate] = useState("")
 const [isbn,setIsbn] = useState("")
 const [summary,setSummary] = useState("")
-const [message,setMessage] = useState("")
 
 const {data:authorsData} = useQuery(FETCH_AUTHORS_QUERY)
 
@@ -44,6 +44,8 @@ const [createBook] = useMutation(CREATE_BOOK)
 const submit = async(e)=>{
 
 e.preventDefault()
+
+try{
 
 await createBook({
 
@@ -61,23 +63,21 @@ refetchQueries:[
 
 })
 
-setMessage("Book created ✅")
+toast.success("Book created 📚")
 
-setTimeout(()=>{
 navigate("/library")
-},10000)
+
+}catch(err){
+
+toast.error("Error creating book")
+
+}
 
 }
 
 return(
 
-<div>
-
-{message && (
-<p style={{color:"green"}}>
-{message}
-</p>
-)}
+<div className="formWrapper">
 
 <form className="formContainer" onSubmit={submit}>
 
@@ -97,9 +97,11 @@ onChange={(e)=>setAuthorId(e.target.value)}
 <option value="">Select Author</option>
 
 {authorsData?.allAuthors.map(author=>(
+
 <option key={author.id} value={author.id}>
 {author.name}
 </option>
+
 ))}
 
 </select>

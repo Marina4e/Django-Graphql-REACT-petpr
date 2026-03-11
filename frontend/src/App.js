@@ -1,39 +1,54 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 import BookPage from "./components/BookPage";
 import BookForm from "./components/BookForm";
 import BooksLibrary from "./components/BooksLibrary";
 import EditBook from "./components/EditBook";
+import HomePage from "./components/HomePage";
+
 import "./styles.css";
 
 function App() {
 
-  return (
-    <BrowserRouter>
+return (
 
-      <div className="container">
+<BrowserRouter>
 
-        <h1>📚 Home Library </h1>
+<div className="container">
 
-        <nav className="menu">
+<h1 className="title">📚 Home Library</h1>
 
-          <Link to="/">Бібліотека</Link>
+<nav className="menu">
 
-          <Link to="/create-book">Створити книгу</Link>
+<Link to="/">Home</Link>
 
-        </nav>
+<Link to="/library">Бібліотека</Link>
 
-        <Routes>
-          <Route path="/" element={<BooksLibrary />} />
-          <Route path="/create-book" element={<BookForm />} />
-          <Route path="/book/:id" element={<BookPage />} />
-          <Route path="/edit/:id" element={<EditBook/>}/>
-        </Routes>
+<Link to="/create-book">Створити книгу</Link>
 
-      </div>
+</nav>
 
-    </BrowserRouter>
-  );
+<Routes>
+
+<Route path="/" element={<HomePage />} />
+
+<Route path="/library" element={<BooksLibrary />} />
+
+<Route path="/create-book" element={<BookForm />} />
+
+<Route path="/book/:id" element={<BookPage />} />
+
+<Route path="/edit/:id" element={<EditBook />} />
+
+</Routes>
+
+</div>
+
+</BrowserRouter>
+
+);
+
 }
 
 export default App;
