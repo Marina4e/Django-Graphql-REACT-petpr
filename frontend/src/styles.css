@@ -350,3 +350,41 @@ cursor:pointer;
 font-size:16px;
 
 }
+
+.pagination{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.pagination button{
+
+padding:8px 16px;
+
+background:#5c5ce0;
+
+color:white;
+
+border:none;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+.pagination button:disabled{
+
+background:gray;
+
+cursor:not-allowed;
+
+}
