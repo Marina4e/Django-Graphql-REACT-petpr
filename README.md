@@ -1,3 +1,124 @@
+# 📚 Home Library (React + GraphQL)
+
+A small full-stack library management application built with **React**, **Apollo GraphQL**, and **Django GraphQL backend**.
+
+The project allows users to manage a personal book collection: create, edit, delete and browse books.
+
+---
+
+# 🚀 Features
+
+- View all books in a paginated library
+- Create new books
+- Edit existing books
+- Delete books
+- View book details
+- Select authors from dropdown
+- GraphQL queries and mutations
+- Toast notifications for actions
+- Loading spinner
+- Simple navigation with React Router
+
+---
+
+# 🧰 Technologies
+
+Frontend:
+
+- React
+- React Router
+- Apollo Client
+- GraphQL
+- React Toastify
+- CSS
+
+Backend:
+
+- Django
+- Graphene GraphQL
+- PostgreSQL
+
+---
+
+# 📂 Project Structure
+frontend/src
+
+components/
+BookForm.js -> create book
+BookPage.js -> book details
+BooksLibrary.js -> books list
+EditBook.js -> edit book
+HomePage.js -> homepage
+
+App.js -> routing
+queries.js -> GraphQL queries
+mutations.js -> GraphQL mutations
+styles.css -> styling
+
+---
+
+# ⚙️ How to Run
+
+### Backend
+
+
+python manage.py runserver
+
+
+### Frontend
+
+
+cd frontend
+npm install
+npm start
+
+
+App runs on:
+
+
+http://localhost:3000
+
+
+---
+
+# 📖 How to Use
+
+1. Open **Home Page**
+2. Click **Open Library**
+3. Browse books
+4. Click a book to see details
+5. Use **Edit** or **Delete**
+6. Click **Create Book** to add a new one
+
+---
+
+# 🎯 Learning Goals
+
+This project demonstrates:
+
+- GraphQL queries and mutations
+- Apollo Client integration
+- React state management
+- CRUD operations
+- SPA navigation
+- Component architecture
+
+---
+
+# 📌 Future Improvements
+
+- Book search
+- Better UI cards layout
+- Authentication
+- Book covers upload
+- Filtering and sorting
+
+---
+
+# 👩‍💻 Marina4e
+
+Pet project for learning **React + GraphQL + Django**.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
