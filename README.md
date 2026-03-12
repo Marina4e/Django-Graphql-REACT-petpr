@@ -189,3 +189,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+<img width="1491" height="648" alt="Знімок екрана 2026-03-12 140954" src="https://github.com/user-attachments/assets/56796b30-6b69-49c3-bb9e-b7564507efb7" />
+
+<img width="878" height="604" alt="Знімок екрана 2026-03-12 141104" src="https://github.com/user-attachments/assets/a95e5e0c-0030-4320-9231-1d255bb32dad" />
+
+<img width="667" height="564" alt="Знімок екрана 2026-03-12 141133" src="https://github.com/user-attachments/assets/7425eeb6-0972-46ae-805e-d9effb35b4dd" />
+
+<img width="878" height="616" alt="Знімок екрана 2026-03-12 143319" src="https://github.com/user-attachments/assets/b836b4aa-d9a8-497d-9ec6-4702d53080a1" />
+
+<img width="936" height="595" alt="Знімок екрана 2026-03-12 143353" src="https://github.com/user-attachments/assets/c8764e2b-a21f-45a7-9478-2cb195702f34" />
+
+<img width="847" height="651" alt="Знімок екрана 2026-03-12 143503" src="https://github.com/user-attachments/assets/15135dee-49eb-434e-b902-7545b3f09030" />
+
+<img width="843" height="679" alt="Знімок екрана 2026-03-12 143533" src="https://github.com/user-attachments/assets/da39f1cf-5140-4713-9e9c-e5415e520bd4" />
+
+
+
