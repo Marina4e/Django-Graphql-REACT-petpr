@@ -63,9 +63,11 @@ refetchQueries:[
 
 })
 
-toast.success("Book created 📚")
+toast.success("Книгу створено 📚")
 
+setTimeout(()=>{
 navigate("/library")
+},3000)
 
 }catch(err){
 

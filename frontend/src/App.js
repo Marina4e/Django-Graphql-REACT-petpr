@@ -1,11 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import BookPage from "./components/BookPage";
 import BookForm from "./components/BookForm";
 import BooksLibrary from "./components/BooksLibrary";
 import EditBook from "./components/EditBook";
 import HomePage from "./components/HomePage";
+
+
 
 import "./styles.css";
 
@@ -42,6 +46,11 @@ return (
 <Route path="/edit/:id" element={<EditBook />} />
 
 </Routes>
+
+<ToastContainer
+position="top-center"
+autoClose={60000}
+/>
 
 </div>
 

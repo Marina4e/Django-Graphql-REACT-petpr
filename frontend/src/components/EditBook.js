@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import {useParams,useNavigate} from "react-router-dom";
 import {useQuery,useMutation} from "@apollo/client/react";
 import {gql} from "@apollo/client";
+import { toast } from "react-toastify";
 
 const GET_BOOK = gql`
 query($id:Int!){
@@ -61,8 +62,11 @@ summary
 }
 })
 
-navigate(`/book/${id}`)
+toast.success("Книгу відредаговано ✏️")
 
+setTimeout(()=>{
+navigate(`/book/${id}`)
+},3000)
 }
 
 return(
